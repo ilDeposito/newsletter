@@ -1,0 +1,13 @@
+# Runtime configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Local volumes and backups
+postgres-data/
+backups/
+
+# OS/editor files
+.DS_Store
+.idea/
+.vscode/

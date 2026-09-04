@@ -1,0 +1,57 @@
+services:
+  listmonk_db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    container_name: ildeposito_listmonk_db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-listmonk}
+      POSTGRES_USER: ${POSTGRES_USER:-listmonk}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - listmonk_db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    networks:
+      - internal
+
+  listmonk:
+    image: listmonk/listmonk:latest
+    container_name: ildeposito_listmonk
+    restart: unless-stopped
+    depends_on:
+      listmonk_db:
+        condition: service_healthy
+    hostname: ${LISTMONK_DOMAIN:?Set LISTMONK_DOMAIN in .env}
+    command: [sh, -c, "./listmonk --install --idempotent --yes --config '' && ./listmonk --upgrade --yes --config '' && ./listmonk --config ''"]
+    environment:
+      LISTMONK_app__address: 0.0.0.0:9000
+      LISTMONK_ADMIN_USER: ${LISTMONK_ADMIN_USER:?Set LISTMONK_ADMIN_USER in .env}
+      LISTMONK_ADMIN_PASSWORD: ${LISTMONK_ADMIN_PASSWORD:?Set LISTMONK_ADMIN_PASSWORD in .env}
+      LISTMONK_db__host: db
+      LISTMONK_db__port: 5432
+      LISTMONK_db__user: ${POSTGRES_USER:-listmonk}
+      LISTMONK_db__password: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      LISTMONK_db__database: ${POSTGRES_DB:-listmonk}
+      LISTMONK_db__ssl_mode: disable
+      TZ: ${TZ:-Europe/Rome}
+    volumes:
+      - listmonk_uploads:/listmonk/uploads
+    labels:
+      caddy: ${LISTMONK_DOMAIN:?Set LISTMONK_DOMAIN in .env}
+      caddy.reverse_proxy: "{{upstreams 9000}}"
+    networks:
+      - internal
+      - caddy
+
+volumes:
+  listmonk_db:
+  listmonk_uploads:
+
+networks:
+  internal:
+    internal: true
+  caddy:
+    external: true
