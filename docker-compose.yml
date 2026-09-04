@@ -30,7 +30,7 @@ services:
       LISTMONK_app__address: 0.0.0.0:9000
       LISTMONK_ADMIN_USER: ${LISTMONK_ADMIN_USER:?Set LISTMONK_ADMIN_USER in .env}
       LISTMONK_ADMIN_PASSWORD: ${LISTMONK_ADMIN_PASSWORD:?Set LISTMONK_ADMIN_PASSWORD in .env}
-      LISTMONK_db__host: db
+      LISTMONK_db__host: listmonk_db
       LISTMONK_db__port: 5432
       LISTMONK_db__user: ${POSTGRES_USER:-listmonk}
       LISTMONK_db__password: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
