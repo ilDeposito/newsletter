@@ -18,7 +18,7 @@
 
             .wrap {
                 background-color: #fff;
-                padding: 30px;
+                padding: 0 30px 30px 30px;
                 max-width: 600px;
                 margin: 0 auto;
                 border-radius: 5px;
@@ -65,7 +65,7 @@
             .divider-wrap-footer {
                 max-width: 600px;
                 margin: 0 auto;
-                padding: 0 30px 24px 30px;
+                padding: 0 0 24px 0;
             }
 
             .footer {
@@ -96,6 +96,9 @@
 
             .gutter {
                 padding: 30px;
+            }
+            .gutter-top {
+                padding: 0;
             }
             .button {
                 background: #1a1a1a;
@@ -160,9 +163,8 @@
                 .gutter {
                     padding: 10px;
                 }
-                .divider-wrap-footer {
-                    padding-left: 20px;
-                    padding-right: 20px;
+                .gutter-top {
+                    padding: 0;
                 }
                 .social-table {
                     width: 100%;
@@ -176,7 +178,7 @@
         </style>
     </head>
 <body style="background-color: #ffffff;">
-    <div class="gutter">&nbsp;</div>
+    <div class="gutter gutter-top" style="padding: 0;">&nbsp;</div>
     <div class="wrap">
         <div class="header">
             <!-- HEADER: logo centrato in alto. Usa il setting LogoURL (Settings > General). Imposta LogoURL = https://newsletter.ildeposito.org/uploads/ildeposito-icon.png -->
@@ -204,7 +206,7 @@
 
     <div class="footer">
         <!-- FOOTER: divisore leggero orizzontale grigio tra contenuto e footer. -->
-        <div class="divider-wrap-footer" style="max-width: 600px; margin: 0 auto; padding: 0 30px 24px 30px;">
+        <div class="divider-wrap-footer" style="max-width: 600px; margin: 0 auto; padding: 0 0 24px 0;">
             <div class="divider" style="border-top: 1px solid #dddddd; height: 1px; line-height: 1px; font-size: 1px;">&nbsp;</div>
         </div>
         <!-- FOOTER: testo chiusura PRIMA delle icone. Rimuossa riga "powered by listmonk" volutamente per coerenza campagne. -->
