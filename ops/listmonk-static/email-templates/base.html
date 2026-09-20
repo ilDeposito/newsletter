@@ -1,0 +1,213 @@
+{{ define "header" }}
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+        <base target="_blank">
+
+        <style>
+            body {
+                background-color: #ffffff;
+                font-family: Helvetica, Arial, sans-serif;
+                font-size: 16px;
+                line-height: 25px;
+                margin: 0;
+                color: #1a1a1a;
+            }
+
+            .wrap {
+                background-color: #fff;
+                padding: 30px;
+                max-width: 600px;
+                margin: 0 auto;
+                border-radius: 5px;
+            }
+
+            .header {
+                text-align: center;
+                padding-bottom: 0;
+                margin-bottom: 0;
+            }
+
+            /* Logo centrato (60x60 come nelle campagne). L'URL viene dal setting LogoURL. */
+            .logo-img {
+                display: block;
+                margin: 0 auto;
+                width: 60px;
+                height: 60px;
+                max-width: 60px;
+            }
+
+            /* Scritta sito sotto il logo, sempre centrata (stile campagne: Georgia 17px). */
+            .site-name {
+                font-family: Georgia, 'Times New Roman', Times, serif;
+                font-size: 17px;
+                line-height: 24px;
+                text-align: center;
+                padding: 6px 0 24px 0;
+            }
+                .site-name a {
+                    color: #1a1a1a;
+                    text-decoration: underline;
+                }
+
+            /* Divisore leggero orizzontale grigio (come nelle campagne: #dddddd). */
+            .divider {
+                border-top: 1px solid #dddddd;
+                height: 1px;
+                line-height: 1px;
+                font-size: 1px;
+            }
+            .divider-wrap {
+                padding: 0 0 32px 0;
+            }
+            .divider-wrap-footer {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 0 30px 24px 30px;
+            }
+
+            .footer {
+                text-align: center;
+                font-size: 13px;
+                line-height: 20px;
+                color: #5a5a5a;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+                .footer a {
+                    color: #1a1a1a;
+                    text-decoration: underline;
+                }
+
+            .social-table {
+                margin: 0 auto;
+            }
+            .social-cell {
+                padding: 0 5px;
+            }
+            .social-icon {
+                display: block;
+                width: 45px;
+                height: 45px;
+                border: 0;
+            }
+
+            .gutter {
+                padding: 30px;
+            }
+            .button {
+                background: #1a1a1a;
+                color: #fff !important;
+                display: inline-block;
+                border-radius: 3px;
+                padding: 10px 30px;
+                text-align: center;
+                text-decoration: none;
+                font-weight: bold;
+            }
+            .button:hover {
+                background: #222;
+                color: #fff;
+            }
+            img {
+                max-width: 100%;
+            }
+
+            a {
+                color: #1a1a1a;
+            }
+                a:hover {
+                    color: #111;
+                }
+            @media screen and (max-width: 600px) {
+                .wrap {
+                    max-width: auto;
+                }
+                .gutter {
+                    padding: 10px;
+                }
+                .divider-wrap-footer {
+                    padding-left: 20px;
+                    padding-right: 20px;
+                }
+                .social-table {
+                    width: 100%;
+                }
+                .social-cell {
+                    width: 25%;
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+            }
+        </style>
+    </head>
+<body style="background-color: #ffffff;">
+    <div class="gutter">&nbsp;</div>
+    <div class="wrap">
+        <div class="header">
+            <!-- HEADER: logo centrato in alto. Usa il setting LogoURL (Settings > General). Imposta LogoURL = https://newsletter.ildeposito.org/uploads/ildeposito-icon.png -->
+            {{ if ne LogoURL "" }}
+                <img src="{{ LogoURL }}" alt="ilDeposito.org" class="logo-img" width="60" height="60" style="width: 60px; height: 60px; display: block; margin: 0 auto; border: 0;" />
+            {{ end }}
+            <!-- HEADER: scritta sito sempre centrata, sotto il logo. Sostituisci URL/testo se serve. -->
+            <div class="site-name" align="center" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 17px; line-height: 24px; text-align: center; padding: 6px 0 24px 0;">
+                <a href="https://www.ildeposito.org" target="_blank" style="color: #1a1a1a; text-decoration: underline;">ilDeposito.org</a>
+            </div>
+            <!-- HEADER: divisore leggero orizzontale grigio tra header e contenuto. -->
+            <div class="divider-wrap" style="padding: 0 0 32px 0;">
+                <div class="divider" style="border-top: 1px solid #dddddd; height: 1px; line-height: 1px; font-size: 1px;">&nbsp;</div>
+            </div>
+        </div>
+{{ end }}
+
+{{ define "footer" }}
+    </div>
+
+    <div class="footer">
+        <!-- FOOTER: divisore leggero orizzontale grigio tra contenuto e footer. -->
+        <div class="divider-wrap-footer" style="max-width: 600px; margin: 0 auto; padding: 0 30px 24px 30px;">
+            <div class="divider" style="border-top: 1px solid #dddddd; height: 1px; line-height: 1px; font-size: 1px;">&nbsp;</div>
+        </div>
+        <!-- FOOTER: 4 immagini affiancate (social). Ogni <td> è un link: sostituisci pure href/src/alt con i tuoi. URL reali copiati dal template campagne. -->
+        <table role="presentation" class="social-table" cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 0 auto;">
+            <tr>
+                <!-- SOCIAL 1: Facebook. Sostituisci href e src con i tuoi. -->
+                <td class="social-cell" align="center" valign="middle" style="padding: 0 5px;">
+                    <a href="https://www.facebook.com/ildeposito.org" target="_blank" style="display: inline-block; text-decoration: none; border: 0;">
+                        <img src="https://newsletter.ildeposito.org/uploads/facebook-icon.png" width="45" height="45" alt="Facebook" class="social-icon" style="width: 45px; height: 45px; display: block; border: 0;" />
+                    </a>
+                </td>
+                <!-- SOCIAL 2: Instagram. Sostituisci href e src con i tuoi. -->
+                <td class="social-cell" align="center" valign="middle" style="padding: 0 5px;">
+                    <a href="https://www.instagram.com/ildepositocantiprotesta/" target="_blank" style="display: inline-block; text-decoration: none; border: 0;">
+                        <img src="https://newsletter.ildeposito.org/uploads/instagram-icon.png" width="45" height="45" alt="Instagram" class="social-icon" style="width: 45px; height: 45px; display: block; border: 0;" />
+                    </a>
+                </td>
+                <!-- SOCIAL 3: Telegram. Sostituisci href e src con i tuoi. -->
+                <td class="social-cell" align="center" valign="middle" style="padding: 0 5px;">
+                    <a href="https://t.me/ildeposito" target="_blank" style="display: inline-block; text-decoration: none; border: 0;">
+                        <img src="https://newsletter.ildeposito.org/uploads/telegram-icon.png" width="45" height="45" alt="Telegram" class="social-icon" style="width: 45px; height: 45px; display: block; border: 0;" />
+                    </a>
+                </td>
+                <!-- SOCIAL 4: Mastodon. Sostituisci href e src con i tuoi. -->
+                <td class="social-cell" align="center" valign="middle" style="padding: 0 5px;">
+                    <a href="https://mastodon.uno/@ildeposito" target="_blank" style="display: inline-block; text-decoration: none; border: 0;">
+                        <img src="https://newsletter.ildeposito.org/uploads/mastodon-icon.png" width="45" height="45" alt="Mastodon" class="social-icon" style="width: 45px; height: 45px; display: block; border: 0;" />
+                    </a>
+                </td>
+            </tr>
+        </table>
+        <!-- FOOTER: testo chiusura. Rimuossa riga "powered by listmonk" volutamente per coerenza campagne. -->
+        <p style="font-size: 13px; line-height: 20px; color: #5a5a5a; padding: 16px 30px 0 30px;">
+            Newsletter ufficiale di ilDeposito.org<br />
+            <a href="https://www.ildeposito.org/informazioni/privacy" target="_blank" style="color: #1a1a1a; text-decoration: underline;">Privacy</a>
+            &nbsp;-&nbsp;
+            <a href="https://www.ildeposito.org" target="_blank" style="color: #1a1a1a; text-decoration: underline;">Sito</a>
+        </p>
+    </div>
+    <div class="gutter">&nbsp;</div>
+</body>
+</html>
+{{ end }}

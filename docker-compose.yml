@@ -25,7 +25,7 @@ services:
       listmonk_db:
         condition: service_healthy
     hostname: ${LISTMONK_DOMAIN:?Set LISTMONK_DOMAIN in .env}
-    command: [sh, -c, "./listmonk --install --idempotent --yes --config '' && ./listmonk --upgrade --yes --config '' && ./listmonk --config ''"]
+    command: [sh, -c, "./listmonk --install --idempotent --yes --config '' --static-dir /listmonk/static-override && ./listmonk --upgrade --yes --config '' --static-dir /listmonk/static-override && ./listmonk --config '' --static-dir /listmonk/static-override"]
     environment:
       LISTMONK_app__address: 0.0.0.0:9000
       LISTMONK_ADMIN_USER: ${LISTMONK_ADMIN_USER:?Set LISTMONK_ADMIN_USER in .env}
@@ -39,6 +39,7 @@ services:
       TZ: ${TZ:-Europe/Rome}
     volumes:
       - listmonk_uploads:/listmonk/uploads
+      - ./ops/listmonk-static:/listmonk/static-override:ro
     labels:
       caddy: ${LISTMONK_DOMAIN:?Set LISTMONK_DOMAIN in .env}
       caddy.reverse_proxy: "{{upstreams 9000}}"
