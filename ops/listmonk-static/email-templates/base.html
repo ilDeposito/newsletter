@@ -115,12 +115,44 @@
                 max-width: 100%;
             }
 
-            a {
-                color: #1a1a1a;
+            /* Link neri nel contenuto e nel footer.
+               I template figli (opt-in, ecc.) non hanno stili inline: l'unica leva è questo CSS.
+               Specificità alta + !important per battere il blu di default dei client. */
+            .wrap a,
+            .wrap a:link,
+            .wrap a:visited,
+            .tx-content a,
+            .tx-content a:link,
+            .tx-content a:visited {
+                color: #1a1a1a !important;
+                text-decoration: underline;
             }
-                a:hover {
+                .wrap a:hover,
+                .tx-content a:hover {
                     color: #111;
                 }
+
+            /* Eccezione: il pulsante resta bianco su fondo nero (viene dopo la regola nera). */
+            .wrap a.button,
+            .wrap a.button:link,
+            .wrap a.button:visited,
+            .tx-content a.button,
+            .tx-content a.button:link,
+            .tx-content a.button:visited {
+                color: #fff !important;
+                text-decoration: none;
+            }
+
+            /* Link auto-rilevati dal client (es. email scritte in chiaro nel testo):
+               eredita colore/font invece del blu di default. Non tutti i client lo rispettano. */
+            a[x-apple-data-detectors] {
+                color: inherit !important;
+                text-decoration: underline !important;
+                font-size: inherit !important;
+                font-family: inherit !important;
+                font-weight: inherit !important;
+                line-height: inherit !important;
+            }
             @media screen and (max-width: 600px) {
                 .wrap {
                     max-width: auto;
@@ -160,9 +192,14 @@
                 <div class="divider" style="border-top: 1px solid #dddddd; height: 1px; line-height: 1px; font-size: 1px;">&nbsp;</div>
             </div>
         </div>
+        <!-- CONTENT: wrapper attorno al contenuto iniettato dai template figli (opt-in, ecc.).
+             Serve da hook CSS (.tx-content a) per i link neri senza toccare gli altri file.
+             Chiuso nel define "footer". -->
+        <div class="tx-content">
 {{ end }}
 
 {{ define "footer" }}
+        </div>
     </div>
 
     <div class="footer">
@@ -170,7 +207,14 @@
         <div class="divider-wrap-footer" style="max-width: 600px; margin: 0 auto; padding: 0 30px 24px 30px;">
             <div class="divider" style="border-top: 1px solid #dddddd; height: 1px; line-height: 1px; font-size: 1px;">&nbsp;</div>
         </div>
-        <!-- FOOTER: 4 immagini affiancate (social). Ogni <td> è un link: sostituisci pure href/src/alt con i tuoi. URL reali copiati dal template campagne. -->
+        <!-- FOOTER: testo chiusura PRIMA delle icone. Rimuossa riga "powered by listmonk" volutamente per coerenza campagne. -->
+        <p style="font-size: 13px; line-height: 20px; color: #5a5a5a; padding: 0 30px 20px 30px;">
+            Newsletter ufficiale di ilDeposito.org<br />
+            <a href="https://www.ildeposito.org/informazioni/privacy" target="_blank" style="color: #1a1a1a; text-decoration: underline;">Privacy</a>
+            &nbsp;-&nbsp;
+            <a href="https://www.ildeposito.org" target="_blank" style="color: #1a1a1a; text-decoration: underline;">Sito</a>
+        </p>
+        <!-- FOOTER: 4 immagini affiancate (social) SOTTO il testo. Ogni <td> è un link: sostituisci pure href/src/alt con i tuoi. URL reali copiati dal template campagne. -->
         <table role="presentation" class="social-table" cellpadding="0" cellspacing="0" border="0" align="center" style="margin: 0 auto;">
             <tr>
                 <!-- SOCIAL 1: Facebook. Sostituisci href e src con i tuoi. -->
@@ -199,13 +243,6 @@
                 </td>
             </tr>
         </table>
-        <!-- FOOTER: testo chiusura. Rimuossa riga "powered by listmonk" volutamente per coerenza campagne. -->
-        <p style="font-size: 13px; line-height: 20px; color: #5a5a5a; padding: 16px 30px 0 30px;">
-            Newsletter ufficiale di ilDeposito.org<br />
-            <a href="https://www.ildeposito.org/informazioni/privacy" target="_blank" style="color: #1a1a1a; text-decoration: underline;">Privacy</a>
-            &nbsp;-&nbsp;
-            <a href="https://www.ildeposito.org" target="_blank" style="color: #1a1a1a; text-decoration: underline;">Sito</a>
-        </p>
     </div>
     <div class="gutter">&nbsp;</div>
 </body>
