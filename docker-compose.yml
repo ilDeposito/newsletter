@@ -45,6 +45,7 @@ services:
     networks:
       - internal
       - caddy
+      - ildeposito-prod-internal
 
 volumes:
   listmonk_db:
@@ -54,4 +55,6 @@ networks:
   internal:
     internal: true
   caddy:
+    external: true
+  ildeposito-prod-internal:
     external: true
