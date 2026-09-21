@@ -1,0 +1,134 @@
+{{ define "header" }}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{{ .Data.Title }} - {{ .SiteName }}</title>
+	<meta name="description" content="{{ .Data.Description }}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+
+	{{ if .EnablePublicArchive }}
+		<link rel="alternate" type="application/rss+xml" title="{{ L.T "public.archiveTitle" }} - {{ .SiteName }}"
+			href="{{ .RootURL }}/archive.xml" />
+	{{ end }}
+
+	<link href="/public/static/style.css?v={{ .AssetVersion }}" rel="stylesheet" type="text/css" />
+	<link href="/public/custom.css?v={{ .AssetVersion }}" rel="stylesheet" type="text/css">
+	<script src="/public/custom.js?v={{ .AssetVersion }}" async defer></script>
+
+	{{ if ne .FaviconURL "" }}
+		<link rel="icon" href="{{ .FaviconURL }}" type="image/x-icon" />
+	{{ else }}
+		<link rel="icon" href="/public/static/favicon.png?v={{ .AssetVersion }}" type="image/png" />
+	{{ end }}
+	<style>
+		/* Brand ilDeposito: stesso look dell'header/footer email (base.html). */
+		.header {
+			border-bottom: 0;
+			text-align: center;
+		}
+		.header .logo-brand img {
+			display: block;
+			margin: 0 auto;
+			width: 60px;
+			height: 60px;
+			max-width: 60px;
+		}
+		.header .logo-brand .site-name {
+			font-family: Georgia, 'Times New Roman', Times, serif;
+			font-size: 17px;
+			line-height: 24px;
+			text-align: center;
+			padding: 6px 0 24px 0;
+		}
+		.header .logo-brand .site-name a {
+			color: #1a1a1a;
+			text-decoration: underline;
+		}
+		.brand-divider {
+			border-top: 1px solid #dddddd;
+			height: 1px;
+			line-height: 1px;
+			font-size: 1px;
+		}
+		.brand-footer {
+			text-align: center;
+			font-size: 13px;
+			line-height: 20px;
+			color: #5a5a5a;
+			padding-top: 24px;
+		}
+		.brand-footer a {
+			color: #1a1a1a;
+			text-decoration: underline;
+		}
+		.brand-social {
+			margin: 16px auto 0 auto;
+		}
+		.brand-social td {
+			padding: 0 5px;
+		}
+		.brand-social img {
+			display: block;
+			width: 45px;
+			height: 45px;
+			border: 0;
+		}
+	</style>
+</head>
+<body>
+    <div class="container wrap">
+		<header class="header">
+			<div class="logo logo-brand">
+				{{ if ne .LogoURL "" }}
+					<img src="{{ .LogoURL }}" alt="ilDeposito.org" width="60" height="60" />
+				{{ else }}
+					<img src="/public/static/logo.svg?v={{ .AssetVersion }}" alt="ilDeposito.org" width="60" height="60" />
+				{{ end }}
+				<div class="site-name">
+					<a href="https://www.ildeposito.org?utm_source=newsletter&amp;utm_medium=web&amp;utm_campaign=system&amp;utm_content=header">ilDeposito.org</a>
+				</div>
+				<div class="brand-divider">&nbsp;</div>
+			</div>
+		</header>
+{{ end }}
+
+{{ define "footer" }}
+	</div>
+
+	<footer class="container brand-footer">
+		<div class="brand-divider">&nbsp;</div>
+		<p>
+			Newsletter ufficiale di ilDeposito.org<br />
+			<a href="https://www.ildeposito.org/informazioni/privacy?utm_source=newsletter&amp;utm_medium=web&amp;utm_campaign=system&amp;utm_content=footer-privacy">Privacy</a>
+			&nbsp;-&nbsp;
+			<a href="https://www.ildeposito.org?utm_source=newsletter&amp;utm_medium=web&amp;utm_campaign=system&amp;utm_content=footer-sito">Sito</a>
+		</p>
+		<table role="presentation" class="brand-social" cellpadding="0" cellspacing="0" border="0" align="center">
+			<tr>
+				<td align="center" valign="middle">
+					<a href="https://www.facebook.com/ildeposito.org" target="_blank" rel="noreferrer">
+						<img src="https://newsletter.ildeposito.org/uploads/facebook-icon.png" width="45" height="45" alt="Facebook" />
+					</a>
+				</td>
+				<td align="center" valign="middle">
+					<a href="https://www.instagram.com/ildepositocantiprotesta/" target="_blank" rel="noreferrer">
+						<img src="https://newsletter.ildeposito.org/uploads/instagram-icon.png" width="45" height="45" alt="Instagram" />
+					</a>
+				</td>
+				<td align="center" valign="middle">
+					<a href="https://t.me/ildeposito" target="_blank" rel="noreferrer">
+						<img src="https://newsletter.ildeposito.org/uploads/telegram-icon.png" width="45" height="45" alt="Telegram" />
+					</a>
+				</td>
+				<td align="center" valign="middle">
+					<a href="https://mastodon.uno/@ildeposito" target="_blank" rel="noreferrer">
+						<img src="https://newsletter.ildeposito.org/uploads/mastodon-icon.png" width="45" height="45" alt="Mastodon" />
+					</a>
+				</td>
+			</tr>
+		</table>
+	</footer>
+</body>
+</html>
+{{ end }}
